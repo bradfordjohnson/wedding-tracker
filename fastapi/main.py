@@ -119,7 +119,7 @@ async def update_expense(
 
 
 @app.delete("/delete/expense/{expense_id}")
-async def delete_expense(expense_id: int, db_dependency):
+async def delete_expense(expense_id: int, db: db_dependency):
     target_expense = (
         db.query(models.Expenses).filter(models.Expenses.id == expense_id).first()
     )
