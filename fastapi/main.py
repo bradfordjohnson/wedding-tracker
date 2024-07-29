@@ -55,7 +55,7 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 
-@app.get("/list/expenses", response_model=List[ExpensesBase])
+@app.get("/expenses/", response_model=List[ExpensesBase])
 async def get_expenses(db: db_dependency, skip: int = 0, limit: int = 100):
     expenses = db.query(models.Expenses).offset(skip).limit(limit).all()
     return expenses
@@ -69,7 +69,7 @@ async def get_expense(expense_id: int, db: db_dependency):
     return result
 
 
-@app.post("/add/expense")
+@app.post("/upload/expense")
 async def add_expense(
     expense: ExpensesBase, db: db_dependency, version: str = Depends(validate_version)
 ):
